@@ -7,10 +7,11 @@
 
 /* Variables */
 :root {
-    --primary-color: #2563eb;
-    --secondary-color: #3b82f6;
-    --dark-color: #1e293b;
-    --light-color: #f8fafc;
+    --primary-color: #003092;
+    --secondary-color: #00879E;
+    --accent-color: #FFAB5B;
+    --dark-color: #003092;
+    --light-color: #FFF2DB;
     --gray-color: #64748b;
     --border-radius: 8px;
     --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -150,7 +151,7 @@ nav ul li a:hover::after {
 
 .secondary:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--light-color);
     transform: translateY(-3px);
 }
 
@@ -241,7 +242,7 @@ nav ul li a:hover::after {
 
 .detail-item h4 {
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* Projects Section */
@@ -268,7 +269,7 @@ nav ul li a:hover::after {
 
 .filter-btn.active, .filter-btn:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--light-color);
 }
 
 .project-container {
@@ -317,7 +318,7 @@ nav ul li a:hover::after {
 
 .tech-stack span {
     padding: 0.2rem 0.8rem;
-    background-color: #e2e8f0;
+    background-color: var(--light-color);
     border-radius: 20px;
     font-size: 0.8rem;
 }
@@ -348,7 +349,7 @@ nav ul li a:hover::after {
 }
 
 .skill-category h3 {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     margin-bottom: 1.5rem;
 }
 
@@ -366,7 +367,7 @@ nav ul li a:hover::after {
     content: attr(data-level) '%';
     position: absolute;
     right: 0;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: bold;
 }
 
@@ -377,7 +378,7 @@ nav ul li a:hover::after {
     bottom: -5px;
     height: 5px;
     width: attr(data-level);
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     border-radius: 5px;
 }
 
@@ -406,7 +407,7 @@ nav ul li a:hover::after {
 .contact-item i {
     margin-right: 1rem;
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .social-links {
@@ -463,7 +464,7 @@ social-links a {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--secondary-color);
 }
 
 /* Updated Contact Section */
@@ -487,7 +488,7 @@ social-links a {
 /* Footer */
 footer {
     background-color: var(--dark-color);
-    color: white;
+    color: var(--light-color);
     text-align: center;
     padding: 2rem 0;
 }
@@ -519,9 +520,9 @@ footer p {
 }
 
 .lang-btn.active {
-    background-color: #333;
-    color: white;
-    border-color: #333;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color);
 }
 
 /* Media Queries */
