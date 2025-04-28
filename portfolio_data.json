@@ -1,0 +1,133 @@
+{
+  "profile": {
+    "fullName": "Leonardo Gasparini",
+    "headline": "Especialista em Arquitetura de Software | Desenvolvedor .NET | Professor apaixonado por tecnologia",
+    "location": "São Paulo, Brasil",
+    "contact": {
+      "email": "lleonardogr@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/lleonardogr",
+      "github": "https://github.com/lleonardogr",
+      "linktree": "https://linktr.ee/lleonardogr"
+    },
+    "summary": "Transformo ideias em soluções digitais eficientes! Desde 2012, sou movido pela paixão de criar sistemas robustos, escaláveis e inovadores no ecossistema .NET e Cloud. Hoje, combino minha experiência técnica e minha habilidade como educador para construir e compartilhar conhecimento no universo da tecnologia."
+  },
+  "skills": {
+    "mainTechnologies": [
+      ".NET Framework (ASP.NET WebForms, ASP.NET MVC, WCF, Windows Services)",
+      ".NET Core (ASP.NET Core)",
+      "SQL Server (Stored Procedures, Functions)"
+    ],
+    "otherTechnologies": [
+      "RabbitMQ",
+      "Hangfire",
+      "Serilog",
+      "Xunit",
+      "Azure (WebWorkers, Service Bus)",
+      "AWS (Lambda, API Gateway)",
+      "Git (GitHub, Azure DevOps, AWS CodePipeline)",
+      "Python (Jupyter, Flask, Airflow, Spark)"
+    ],
+    "workMethodologies": [
+      "Scrum",
+      "Kanban",
+      "Extreme Programming (XP)"
+    ]
+  },
+  "languages": [
+    {
+      "language": "Português",
+      "proficiency": "Nativo"
+    },
+    {
+      "language": "Inglês",
+      "proficiency": "Fluente"
+    },
+    {
+      "language": "Espanhol",
+      "proficiency": "Profissional Fluente"
+    }
+  ],
+  "certifications": [
+    "Nanodegree em UX Design - Udacity",
+    "MTA: Software Development Fundamentals - Microsoft",
+    "Fundamentos de Data Science I e II",
+    "Cambridge English: First Certificate (FCE)"
+  ],
+  "professionalExperience": [
+    {
+      "company": "FIAP",
+      "roles": [
+        {
+          "position": "Professor de Tecnologia",
+          "period": "fev/2023 - presente",
+          "description": "Inspirando a próxima geração de talentos em tecnologia com uma abordagem prática e inovadora."
+        },
+        {
+          "position": "Scrum Master",
+          "period": "mai/2023 - presente",
+          "description": "Facilitando a construção de produtos ágeis e promovendo a cultura de melhoria contínua."
+        }
+      ]
+    },
+    {
+      "company": "Via",
+      "position": "Desenvolvedor Backend Sênior",
+      "period": "jun/2022 - jan/2023",
+      "description": "Atuação em soluções escaláveis e resilientes no varejo digital brasileiro."
+    },
+    {
+      "company": "Tecnobank",
+      "position": "Desenvolvedor Backend Sênior",
+      "period": "set/2021 - jun/2022",
+      "description": "Construção de soluções financeiras para o futuro do Open Banking."
+    },
+    {
+      "company": "Teros",
+      "position": "Head de TI",
+      "period": "jun/2020 - set/2021",
+      "description": "Liderança na criação de uma plataforma SAAS de Openbanking, integrando visão estratégica e técnica como Product Owner."
+    },
+    {
+      "company": "NOVA VIDA TI",
+      "position": "Analista de Sistemas Pleno",
+      "period": "ago/2018 - mar/2020",
+      "description": "Evolução de sistemas legados e criação de novos produtos digitais focados em eficiência."
+    },
+    {
+      "company": "Multilaser",
+      "position": "Analista de Sistemas Pleno",
+      "period": "mai/2018 - jul/2018",
+      "description": "Apoio em projetos de inovação tecnológica em grande escala."
+    },
+    {
+      "company": "Foursys",
+      "position": "Analista de Sistemas Pleno",
+      "period": "jun/2017 - mai/2018",
+      "description": "Modernização de sistemas críticos utilizando tecnologia .NET."
+    },
+    {
+      "company": "Evo Systems",
+      "position": "Analista de Sistemas Júnior",
+      "period": "mai/2015 - jan/2017",
+      "description": "Desenvolvimento de soluções de E-commerce e inteligência de dados (BI)."
+    },
+    {
+      "company": "Universidade de São Paulo (USP)",
+      "position": "Pesquisador",
+      "period": "abr/2012 - mai/2015",
+      "description": "Pesquisa aplicada em projetos de tecnologia da informação em uma das principais universidades da América Latina."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidade de São Paulo (USP)",
+      "degree": "MBA em Tecnologia da Informação",
+      "period": "2015 - 2017"
+    },
+    {
+      "institution": "Fatec São Bernardo do Campo",
+      "degree": "Tecnólogo em Informática para Gestão de Negócios",
+      "period": "2010 - 2012"
+    }
+  ]
+}

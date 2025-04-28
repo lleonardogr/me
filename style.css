@@ -1,0 +1,662 @@
+/* SNES 16-bit Retro Theme Styling */
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --primary-color: #ff00ff; /* Magenta */
+  --secondary-color: #00ffff; /* Cyan */
+  --accent-color: #ffff00; /* Yellow */
+  --border-color: #4b4b4b;
+  --box-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+  --section-bg: rgba(30, 30, 50, 0.7);
+  --snes-gray: #c1c1c1;
+  --snes-dark-gray: #7c7c7c;
+  --snes-purple: #804fa0;
+  --snes-dark-purple: #553366;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* Starfield Background */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(#101020, #000010);
+  z-index: -1;
+  opacity: 0.4;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; background-color: var(--secondary-color); }
+  100% { opacity: 0.3; }
+}
+
+/* Remove the previous stars animation that had invalid syntax */
+.starfield::before {
+  content: '';
+  display: none;
+}
+
+@keyframes stars {
+  /* This is removed as it had invalid syntax */
+}
+
+.game-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 4px solid var(--primary-color);
+  border-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) 1;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 15px var(--primary-color);
+  min-height: 100vh;
+}
+
+/* Header & Title */
+header {
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+#title-animation {
+  color: var(--primary-color);
+  text-shadow: 0 0 8px var(--primary-color);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  opacity: 0;
+}
+
+/* Navigation Menu */
+.game-menu {
+  margin-bottom: 30px;
+}
+
+.game-menu ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.game-menu a {
+  display: inline-block;
+  padding: 8px 12px;
+  color: var(--text-color);
+  text-decoration: none;
+  border: 2px solid var(--secondary-color);
+  background-color: rgba(0, 0, 30, 0.7);
+  transition: all 0.3s;
+  font-size: 0.7rem;
+}
+
+.game-menu a:hover {
+  background-color: var(--secondary-color);
+  color: black;
+  transform: scale(1.05);
+  box-shadow: var(--box-shadow);
+}
+
+.game-menu a::before {
+  content: '► ';
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.game-menu a:hover::before {
+  opacity: 1;
+}
+
+/* Sections */
+.game-section {
+  margin-bottom: 50px;
+  padding: 20px;
+  background-color: var(--section-bg);
+  border: 4px solid;
+  border-image: linear-gradient(to right, var(--primary-color), var(--secondary-color)) 1;
+  position: relative;
+}
+
+.pixel-title {
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0px #000, 0 0 10px var(--accent-color);
+  letter-spacing: 1px;
+  font-size: 1.3rem;
+}
+
+.pixel-divider {
+  height: 4px;
+  background: repeating-linear-gradient(to right, var(--primary-color), var(--secondary-color) 20px);
+  margin: 20px 0;
+  position: relative;
+}
+
+.pixel-divider::before, .pixel-divider::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  top: -2px;
+}
+
+.pixel-divider::before {
+  left: 0;
+}
+
+.pixel-divider::after {
+  right: 0;
+}
+
+/* Dialog Boxes */
+.dialog-box {
+  background-color: rgba(50, 50, 80, 0.7);
+  border: 4px solid var(--secondary-color);
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  line-height: 1.8;
+  font-size: 0.7rem;
+}
+
+.dialog-box::after {
+  content: '▼';
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Skills */
+.skill-category {
+  margin-bottom: 25px;
+}
+
+.skill-category h3 {
+  color: var(--secondary-color);
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-shadow: 0 0 5px var(--secondary-color);
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-item {
+  background-color: rgba(60, 60, 100, 0.7);
+  border: 2px solid var(--primary-color);
+  padding: 6px 10px;
+  border-radius: 0;
+  font-size: 0.6rem;
+  transition: all 0.3s;
+}
+
+.skill-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Languages & Certifications */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.language-item {
+  background-color: rgba(60, 60, 100, 0.7);
+  border: 2px solid var(--primary-color);
+  padding: 12px;
+  font-size: 0.7rem;
+}
+
+.scroll-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  border: 2px solid var(--secondary-color);
+  background-color: rgba(40, 40, 60, 0.7);
+}
+
+.scroll-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-list::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.scroll-list::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 0;
+}
+
+.certification-item {
+  padding: 10px;
+  border-bottom: 2px dashed var(--border-color);
+  font-size: 0.7rem;
+}
+
+.certification-item:last-child {
+  border-bottom: none;
+}
+
+/* Experience & Education */
+.dialog-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.experience-item, .education-item {
+  background-color: rgba(40, 40, 60, 0.9);
+  border: 4px solid var(--secondary-color);
+  padding: 15px;
+  position: relative;
+  font-size: 0.7rem;
+}
+
+.experience-company, .education-institution {
+  color: var(--accent-color);
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+}
+
+.experience-position, .education-degree {
+  color: var(--secondary-color);
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+}
+
+.experience-period, .education-period {
+  color: var(--primary-color);
+  font-size: 0.65rem;
+  margin-bottom: 10px;
+}
+
+.experience-description {
+  line-height: 1.7;
+}
+
+/* Contact */
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.contact-button {
+  padding: 12px 18px;
+  background-color: rgba(60, 60, 100, 0.8);
+  border: 3px solid var(--primary-color);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px var(--primary-color);
+  background-color: rgba(80, 80, 130, 0.8);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.6rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 15px;
+  }
+  
+  #title-animation {
+    font-size: 1.2rem;
+  }
+  
+  .game-menu ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* SNES Animation Styling */
+.snes-animation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 20px;
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+/* SNES Console */
+.snes-console {
+  position: relative;
+  width: 180px;
+  height: 80px;
+  margin-right: 30px;
+  perspective: 300px;
+  transform-style: preserve-3d;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.snes-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--snes-gray);
+  border-radius: 5px;
+  border: 2px solid var(--snes-dark-gray);
+  box-shadow: 0 5px 0 var(--snes-dark-gray);
+  transform: rotateX(10deg);
+}
+
+.snes-front-panel {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background-color: var(--snes-dark-gray);
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.power-button, .reset-button {
+  width: 12px;
+  height: 8px;
+  background-color: var(--snes-purple);
+  border-radius: 2px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.power-button:hover, .reset-button:hover {
+  background-color: var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+.cartridge-slot {
+  width: 100px;
+  height: 6px;
+  background-color: #333;
+  margin-left: auto;
+}
+
+/* SNES Controller */
+.snes-controller {
+  position: absolute;
+  width: 160px;
+  height: 70px;
+  top: 100px;
+  left: 10px;
+  perspective: 300px;
+  animation: controller-float 3s ease-in-out infinite 0.5s;
+}
+
+@keyframes controller-float {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-8px) rotate(-5deg); }
+}
+
+.controller-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--snes-gray);
+  border-radius: 20px;
+  border: 2px solid var(--snes-dark-gray);
+  box-shadow: 0 4px 0 var(--snes-dark-gray);
+  transform: rotateX(20deg) rotateZ(-5deg);
+}
+
+.d-pad {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--snes-dark-gray);
+  border-radius: 50%;
+  animation: d-pad-blink 2s infinite;
+}
+
+@keyframes d-pad-blink {
+  0%, 100% { background-color: var(--snes-dark-gray); }
+  50% { background-color: var(--snes-purple); }
+}
+
+.buttons-area {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+}
+
+.button {
+  background-color: var(--snes-purple);
+  border-radius: 50%;
+  box-shadow: 0 2px 0 var(--snes-dark-purple);
+  cursor: pointer;
+}
+
+.button-y, .button-x, .button-b, .button-a {
+  width: 15px;
+  height: 15px;
+}
+
+.button-a {
+  animation: button-blink 1s infinite;
+}
+
+@keyframes button-blink {
+  0%, 100% { background-color: var(--snes-purple); }
+  50% { background-color: var(--accent-color); }
+}
+
+.start-select-area {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.button-select, .button-start {
+  width: 18px;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.button-start {
+  animation: start-blink 1.5s infinite;
+}
+
+@keyframes start-blink {
+  0%, 100% { background-color: var(--snes-purple); }
+  50% { background-color: var(--primary-color); }
+}
+
+.shoulder-buttons {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-l, .button-r {
+  width: 30px;
+  height: 10px;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Pixel Television */
+.pixel-television {
+  width: 220px;
+  height: 180px;
+  background-color: var(--snes-dark-gray);
+  border-radius: 10px;
+  border: 3px solid #333;
+  position: relative;
+  overflow: hidden;
+  animation: tv-float 4s ease-in-out infinite 0.3s;
+}
+
+@keyframes tv-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.tv-screen {
+  width: 180px;
+  height: 130px;
+  background-color: #000;
+  margin: 15px auto 10px;
+  border: 2px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+.tv-screen:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    transparent 50%, 
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tv-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color);
+  animation: blink-text 1s steps(1) infinite;
+  z-index: 1;
+}
+
+@keyframes blink-text {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.tv-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tv-buttons:after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #333;
+}
+
+/* Add TV scan lines effect */
+.tv-screen:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}

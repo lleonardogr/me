@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonardo Gasparini - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Title Animation Area -->
+        <header>
+            <h1 id="title-animation">Welcome to Leonardo's Portfolio</h1>
+            <!-- SNES Animation Container -->
+            <div class="snes-animation-container">
+                <div class="snes-console">
+                    <div class="snes-body"></div>
+                    <div class="snes-front-panel">
+                        <div class="power-button"></div>
+                        <div class="reset-button"></div>
+                        <div class="cartridge-slot"></div>
+                    </div>
+                    <div class="snes-controller">
+                        <div class="controller-body"></div>
+                        <div class="d-pad"></div>
+                        <div class="buttons-area">
+                            <div class="button button-y"></div>
+                            <div class="button button-x"></div>
+                            <div class="button button-b"></div>
+                            <div class="button button-a"></div>
+                        </div>
+                        <div class="start-select-area">
+                            <div class="button button-select"></div>
+                            <div class="button button-start"></div>
+                        </div>
+                        <div class="shoulder-buttons">
+                            <div class="button button-l"></div>
+                            <div class="button button-r"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pixel-television">
+                    <div class="tv-screen">
+                        <div class="tv-content">PRESS START</div>
+                    </div>
+                    <div class="tv-buttons"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav class="game-menu">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main>
+            <!-- About Section -->
+            <section id="about" class="game-section">
+                <h2 class="pixel-title">About Me</h2>
+                <div class="pixel-divider"></div>
+                <div id="about-content" class="dialog-box"></div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="game-section">
+                <h2 class="pixel-title">Skills</h2>
+                <div class="pixel-divider"></div>
+                
+                <div class="skill-category">
+                    <h3>Main Technologies</h3>
+                    <div id="main-technologies" class="skill-list"></div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Other Technologies</h3>
+                    <div id="other-technologies" class="skill-list"></div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Work Methodologies</h3>
+                    <div id="methodologies" class="skill-list"></div>
+                </div>
+            </section>
+
+            <!-- Languages Section -->
+            <section id="languages" class="game-section">
+                <h2 class="pixel-title">Languages</h2>
+                <div class="pixel-divider"></div>
+                <div id="languages-content" class="skill-grid"></div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section id="certifications" class="game-section">
+                <h2 class="pixel-title">Certifications</h2>
+                <div class="pixel-divider"></div>
+                <div id="certifications-content" class="scroll-list"></div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="game-section">
+                <h2 class="pixel-title">Professional Experience</h2>
+                <div class="pixel-divider"></div>
+                <div id="experience-content" class="dialog-boxes"></div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="game-section">
+                <h2 class="pixel-title">Education</h2>
+                <div class="pixel-divider"></div>
+                <div id="education-content" class="dialog-boxes"></div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="game-section">
+                <h2 class="pixel-title">Contact</h2>
+                <div class="pixel-divider"></div>
+                <div id="contact-content" class="contact-buttons"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="pixel-divider"></div>
+            <p>© <span id="current-year">2025</span> Leonardo Gasparini | A SNES-styled portfolio</p>
+        </footer>
+    </div>
+
+    <!-- Background starfield -->
+    <div class="starfield"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
