@@ -1,0 +1,59 @@
+{
+  "general": {
+    "welcomeTitle": "Bem-vindo ao Portfólio do Leonardo",
+    "pressStart": "PRESSIONE START",
+    "loading": "CARREGANDO...",
+    "copyright": "© 2025 Leonardo Gasparini | Um portfólio estilo SNES"
+  },
+  "navigation": {
+    "aboutMe": "Sobre Mim",
+    "skills": "Habilidades",
+    "languages": "Idiomas",
+    "certifications": "Certificações",
+    "experience": "Experiência",
+    "education": "Educação",
+    "myMusic": "Minha Música",
+    "contact": "Contato"
+  },
+  "sections": {
+    "aboutMe": {
+      "title": "Sobre Mim",
+      "location": "Localização"
+    },
+    "skills": {
+      "title": "Habilidades",
+      "mainTechnologies": "Tecnologias Principais",
+      "otherTechnologies": "Outras Tecnologias",
+      "workMethodologies": "Metodologias de Trabalho"
+    },
+    "languages": {
+      "title": "Idiomas"
+    },
+    "certifications": {
+      "title": "Certificações"
+    },
+    "experience": {
+      "title": "Experiência Profissional",
+      "company": "Empresa",
+      "position": "Cargo",
+      "period": "Período"
+    },
+    "education": {
+      "title": "Educação",
+      "institution": "Instituição",
+      "degree": "Formação",
+      "period": "Período"
+    },
+    "spotify": {
+      "title": "Minha Música",
+      "intro": "Confira meu gosto musical e playlists!"
+    },
+    "contact": {
+      "title": "Contato",
+      "email": "Email",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "linktree": "Linktree"
+    }
+  }
+}

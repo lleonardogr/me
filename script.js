@@ -1,5 +1,9 @@
 // Main script to load portfolio data and animate elements
 
+// Global variables for translations
+let currentLanguage = 'en';
+let translations = null;
+
 // Load JSON data
 async function loadPortfolioData() {
     try {
@@ -12,6 +16,21 @@ async function loadPortfolioData() {
     }
 }
 
+// Load translations
+async function loadTranslations(lang) {
+    if (lang === 'en') {
+        return null; // English is default, no translation needed
+    }
+    
+    try {
+        const response = await fetch(`translations_${lang}.json`);
+        return await response.json();
+    } catch (error) {
+        console.error(`Error loading translations for ${lang}:`, error);
+        return null;
+    }
+}
+
 // Initialize all content with animations
 async function initPortfolio() {
     const portfolioData = await loadPortfolioData();
@@ -19,6 +38,9 @@ async function initPortfolio() {
 
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Initialize language switcher
+    initLanguageSwitcher();
 
     // Initialize title animation
     initTitleAnimation();
@@ -31,12 +53,146 @@ async function initPortfolio() {
     loadSkillsSection(portfolioData.skills);
     loadLanguagesSection(portfolioData.languages);
     loadCertificationsSection(portfolioData.certifications);
-    loadExperienceSection(portfolioData.professionalExperience);
-    loadEducationSection(portfolioData.education);
+    
+    // Load combined timeline (experience + education)
+    loadCombinedTimeline(
+        portfolioData.professionalExperience, 
+        portfolioData.education
+    );
+    
     loadContactSection(portfolioData.profile.contact);
 
     // Initialize section transitions
     initSectionTransitions();
+}
+
+// Initialize language switcher
+function initLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const lang = btn.getAttribute('data-lang');
+            
+            // Don't do anything if this language is already active
+            if (currentLanguage === lang) return;
+            
+            // Update active button
+            langButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Load translations for the selected language
+            if (lang !== 'en' && !translations) {
+                translations = await loadTranslations(lang);
+            }
+            
+            // Update current language
+            currentLanguage = lang;
+            
+            // Update all text on the page
+            updatePageLanguage();
+            
+            // Special animation for language change
+            anime({
+                targets: '.game-section',
+                opacity: [0.5, 1],
+                duration: 800,
+                easing: 'easeOutQuad'
+            });
+        });
+    });
+}
+
+// Update page language
+function updatePageLanguage() {
+    if (currentLanguage === 'en') {
+        // Reset to English (default)
+        resetToEnglish();
+        return;
+    }
+    
+    if (!translations) return;
+    
+    // Update welcome title
+    document.getElementById('title-animation').textContent = translations.general.welcomeTitle;
+    
+    // Update TV content
+    document.querySelector('.tv-content').textContent = translations.general.pressStart;
+    
+    // Update navigation menu
+    const navLinks = document.querySelectorAll('.game-menu a');
+    navLinks[0].textContent = translations.navigation.aboutMe;
+    navLinks[1].textContent = translations.navigation.skills;
+    navLinks[2].textContent = translations.navigation.languages;
+    navLinks[3].textContent = translations.navigation.certifications;
+    navLinks[4].textContent = translations.navigation.timeline || "Timeline";
+    navLinks[5].textContent = translations.navigation.contact;
+    
+    // Update section titles
+    document.querySelector('#about .pixel-title').textContent = translations.sections.aboutMe.title;
+    document.querySelector('#skills .pixel-title').textContent = translations.sections.skills.title;
+    document.querySelector('#languages .pixel-title').textContent = translations.sections.languages.title;
+    document.querySelector('#certifications .pixel-title').textContent = translations.sections.certifications.title;
+    document.querySelector('#timeline .pixel-title').textContent = translations.sections.timeline?.title || "Career Timeline";
+    document.querySelector('#contact .pixel-title').textContent = translations.sections.contact.title;
+    
+    // Update skill category headings
+    const skillCategories = document.querySelectorAll('.skill-category h3');
+    skillCategories[0].textContent = translations.sections.skills.mainTechnologies;
+    skillCategories[1].textContent = translations.sections.skills.otherTechnologies;
+    skillCategories[2].textContent = translations.sections.skills.workMethodologies;
+    
+    // Update footer copyright
+    document.querySelector('footer p').innerHTML = translations.general.copyright;
+    
+    // Update contact button texts
+    const contactButtons = document.querySelectorAll('.contact-button span');
+    contactButtons[0].textContent = translations.sections.contact.email;
+    contactButtons[1].textContent = translations.sections.contact.linkedin;
+    contactButtons[2].textContent = translations.sections.contact.github;
+    contactButtons[3].textContent = translations.sections.contact.linktree;
+}
+
+// Reset to English
+function resetToEnglish() {
+    // Reset welcome title
+    document.getElementById('title-animation').textContent = "Welcome to Leonardo's Portfolio";
+    
+    // Reset TV content
+    document.querySelector('.tv-content').textContent = "PRESS START";
+    
+    // Reset navigation menu
+    const navLinks = document.querySelectorAll('.game-menu a');
+    navLinks[0].textContent = "About Me";
+    navLinks[1].textContent = "Skills";
+    navLinks[2].textContent = "Languages";
+    navLinks[3].textContent = "Certifications";
+    navLinks[4].textContent = "Timeline";
+    navLinks[5].textContent = "Contact";
+    
+    // Reset section titles
+    document.querySelector('#about .pixel-title').textContent = "About Me";
+    document.querySelector('#skills .pixel-title').textContent = "Skills";
+    document.querySelector('#languages .pixel-title').textContent = "Languages";
+    document.querySelector('#certifications .pixel-title').textContent = "Certifications";
+    document.querySelector('#timeline .pixel-title').textContent = "Career Timeline";
+    document.querySelector('#contact .pixel-title').textContent = "Contact";
+    
+    // Reset skill category headings
+    const skillCategories = document.querySelectorAll('.skill-category h3');
+    skillCategories[0].textContent = "Main Technologies";
+    skillCategories[1].textContent = "Other Technologies";
+    skillCategories[2].textContent = "Work Methodologies";
+    
+    // Reset footer copyright
+    document.querySelector('footer p').innerHTML = `© <span id="current-year">${new Date().getFullYear()}</span> Leonardo Gasparini | A SNES-styled portfolio`;
+    
+    // Reset contact button texts
+    const contactButtons = document.querySelectorAll('.contact-button span');
+    contactButtons[0].textContent = "Email";
+    contactButtons[1].textContent = "LinkedIn";
+    contactButtons[2].textContent = "GitHub";
+    contactButtons[3].textContent = "Linktree";
 }
 
 // Title Animation with Anime.js
@@ -149,9 +305,9 @@ function initSNESAnimation() {
     // Special animation for start button
     const startButton = document.querySelector('.button-start');
     startButton.addEventListener('click', () => {
-        // Change TV screen content
+        // Change TV screen content based on current language
         const tvContent = document.querySelector('.tv-content');
-        tvContent.textContent = 'LOADING...';
+        tvContent.textContent = currentLanguage === 'en' ? 'LOADING...' : translations?.general?.loading || 'CARREGANDO...';
         
         // Flash the screen
         anime({
@@ -170,7 +326,7 @@ function initSNESAnimation() {
                     
                     // Change TV content back after delay
                     setTimeout(() => {
-                        tvContent.textContent = 'PRESS START';
+                        tvContent.textContent = currentLanguage === 'en' ? 'PRESS START' : translations?.general?.pressStart || 'PRESSIONE START';
                     }, 2000);
                 }, 800);
             }
@@ -330,76 +486,157 @@ function loadCertificationsSection(certifications) {
     });
 }
 
-// Experience Section
-function loadExperienceSection(experiences) {
-    const experienceContent = document.getElementById('experience-content');
+// Combined Timeline Section
+function loadCombinedTimeline(experiences, education) {
+    const timelineContent = document.getElementById('timeline-content');
+    timelineContent.innerHTML = ''; // Clear existing content if any
     
+    // Create a combined array of all timeline items (both education and work)
+    let timelineItems = [];
+    
+    // Process professional experiences
     experiences.forEach(exp => {
-        const expItem = document.createElement('div');
-        expItem.classList.add('experience-item');
-        
-        // Handle companies with multiple roles
-        if (exp.roles) {
-            let rolesHTML = '';
+        // For entries with multiple roles, add each role as a separate entry
+        if (exp.roles && exp.roles.length > 0) {
             exp.roles.forEach(role => {
-                rolesHTML += `
-                    <div class="experience-role">
-                        <div class="experience-position">${role.position}</div>
-                        <div class="experience-period">${role.period}</div>
-                        <div class="experience-description">${role.description}</div>
-                    </div>
-                `;
+                timelineItems.push({
+                    type: 'experience',
+                    company: exp.company,
+                    position: role.position,
+                    period: role.period,
+                    description: role.description,
+                    // Extract year for sorting (assuming format like "jan/2023 - presente" or "2015 - 2017")
+                    year: extractYearFromPeriod(role.period)
+                });
             });
-            
-            expItem.innerHTML = `
-                <div class="experience-company">${exp.company}</div>
-                ${rolesHTML}
-            `;
         } else {
-            expItem.innerHTML = `
-                <div class="experience-company">${exp.company}</div>
-                <div class="experience-position">${exp.position}</div>
-                <div class="experience-period">${exp.period}</div>
-                <div class="experience-description">${exp.description}</div>
-            `;
+            // For single role experiences
+            timelineItems.push({
+                type: 'experience',
+                company: exp.company,
+                position: exp.position,
+                period: exp.period,
+                description: exp.description,
+                // Extract year for sorting
+                year: extractYearFromPeriod(exp.period)
+            });
+        }
+    });
+    
+    // Process education entries
+    education.forEach(edu => {
+        timelineItems.push({
+            type: 'education',
+            institution: edu.institution,
+            degree: edu.degree,
+            period: edu.period,
+            // Extract year for sorting
+            year: extractYearFromPeriod(edu.period)
+        });
+    });
+    
+    // Sort all items by year, most recent first
+    timelineItems.sort((a, b) => b.year - a.year);
+    
+    // Create and append each timeline item
+    timelineItems.forEach((item, index) => {
+        const timelineItem = document.createElement('div');
+        timelineItem.classList.add('timeline-item');
+        
+        // Create the timeline dot
+        const timelineDot = document.createElement('div');
+        timelineDot.classList.add('timeline-dot');
+        // Add different colors for education vs experience
+        if (item.type === 'education') {
+            timelineDot.style.backgroundColor = 'var(--accent-color)';
+        } else {
+            timelineDot.style.backgroundColor = 'var(--primary-color)';
+        }
+        timelineItem.appendChild(timelineDot);
+        
+        // Create timeline content
+        const itemContent = document.createElement('div');
+        itemContent.classList.add('timeline-content');
+        
+        // Add year badge
+        const timelineDate = document.createElement('div');
+        timelineDate.classList.add('timeline-date');
+        timelineDate.textContent = item.year;
+        itemContent.appendChild(timelineDate);
+        
+        if (item.type === 'experience') {
+            // Add company name
+            const company = document.createElement('div');
+            company.classList.add('timeline-company');
+            company.textContent = item.company;
+            itemContent.appendChild(company);
+            
+            // Add position
+            const position = document.createElement('div');
+            position.classList.add('timeline-position');
+            position.textContent = item.position;
+            itemContent.appendChild(position);
+            
+            // Add period
+            const period = document.createElement('div');
+            period.style.color = 'var(--primary-color)';
+            period.style.fontSize = '0.65rem';
+            period.style.marginBottom = '10px';
+            period.textContent = item.period;
+            itemContent.appendChild(period);
+            
+            // Add description if available
+            if (item.description) {
+                const description = document.createElement('div');
+                description.classList.add('timeline-description');
+                description.textContent = item.description;
+                itemContent.appendChild(description);
+            }
+        } else {
+            // Add institution name
+            const institution = document.createElement('div');
+            institution.classList.add('timeline-institution');
+            institution.textContent = item.institution;
+            itemContent.appendChild(institution);
+            
+            // Add degree
+            const degree = document.createElement('div');
+            degree.classList.add('timeline-degree');
+            degree.textContent = item.degree;
+            itemContent.appendChild(degree);
+            
+            // Add period
+            const period = document.createElement('div');
+            period.style.color = 'var(--accent-color)';
+            period.style.fontSize = '0.65rem';
+            period.textContent = item.period;
+            itemContent.appendChild(period);
         }
         
-        experienceContent.appendChild(expItem);
+        timelineItem.appendChild(itemContent);
+        timelineContent.appendChild(timelineItem);
     });
     
-    // Animate experience items appearing
-    anime({
-        targets: '.experience-item',
-        opacity: [0, 1],
-        translateY: [20, 0],
-        delay: anime.stagger(200),
-        easing: 'easeOutQuad'
-    });
+    // Initialize timeline animations with Intersection Observer
+    initTimelineAnimations();
 }
 
-// Education Section
-function loadEducationSection(education) {
-    const educationContent = document.getElementById('education-content');
+// Helper function to extract year from period string
+function extractYearFromPeriod(periodString) {
+    // Look for patterns like "jan/2023", "2023 -", "2023", etc.
+    const yearMatch = periodString.match(/\b(20\d{2})\b/);
+    if (yearMatch) {
+        return parseInt(yearMatch[1]);
+    }
     
-    education.forEach(edu => {
-        const eduItem = document.createElement('div');
-        eduItem.classList.add('education-item');
-        eduItem.innerHTML = `
-            <div class="education-institution">${edu.institution}</div>
-            <div class="education-degree">${edu.degree}</div>
-            <div class="education-period">${edu.period}</div>
-        `;
-        educationContent.appendChild(eduItem);
-    });
+    // If "presente" or "present" is in the string, use current year
+    if (periodString.toLowerCase().includes('presente') || 
+        periodString.toLowerCase().includes('present')) {
+        return new Date().getFullYear();
+    }
     
-    // Animate education items appearing
-    anime({
-        targets: '.education-item',
-        opacity: [0, 1],
-        translateY: [20, 0],
-        delay: anime.stagger(200),
-        easing: 'easeOutQuad'
-    });
+    // Default to 0 if no year found (will appear at the end of the timeline)
+    return 0;
 }
 
 // Contact Section
@@ -473,6 +710,35 @@ function initSectionTransitions() {
     
     sections.forEach(section => {
         observer.observe(section);
+    });
+}
+
+// Initialize timeline animations with Intersection Observer
+function initTimelineAnimations() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
+    
+    // Special animation for the timeline line
+    document.querySelectorAll('.timeline-line').forEach(line => {
+        anime({
+            targets: line,
+            opacity: [0, 1],
+            height: ['0%', '100%'],
+            duration: 1500,
+            easing: 'easeInOutQuad'
+        });
     });
 }
 

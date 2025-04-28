@@ -13,6 +13,10 @@
     <div class="game-container">
         <!-- Title Animation Area -->
         <header>
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="pt">PT</button>
+            </div>
             <h1 id="title-animation">Welcome to Leonardo's Portfolio</h1>
             <!-- SNES Animation Container -->
             <div class="snes-animation-container">
@@ -58,8 +62,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#languages">Languages</a></li>
                 <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
+                <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -108,18 +111,14 @@
                 <div id="certifications-content" class="scroll-list"></div>
             </section>
 
-            <!-- Experience Section -->
-            <section id="experience" class="game-section">
-                <h2 class="pixel-title">Professional Experience</h2>
+            <!-- Timeline Section (Combined Experience & Education) -->
+            <section id="timeline" class="game-section">
+                <h2 class="pixel-title">Career Timeline</h2>
                 <div class="pixel-divider"></div>
-                <div id="experience-content" class="dialog-boxes"></div>
-            </section>
-
-            <!-- Education Section -->
-            <section id="education" class="game-section">
-                <h2 class="pixel-title">Education</h2>
-                <div class="pixel-divider"></div>
-                <div id="education-content" class="dialog-boxes"></div>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div id="timeline-content" class="timeline-items"></div>
+                </div>
             </section>
 
             <!-- Contact Section -->
