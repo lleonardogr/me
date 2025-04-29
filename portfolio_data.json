@@ -13,19 +13,59 @@
   },
   "skills": {
     "mainTechnologies": [
-      ".NET Framework (ASP.NET WebForms, ASP.NET MVC, WCF, Windows Services)",
-      ".NET Core (ASP.NET Core)",
-      "SQL Server (Stored Procedures, Functions)"
+      {
+        "name": ".NET Framework",
+        "description": "ASP.NET WebForms, ASP.NET MVC, WCF, Windows Services",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg"
+      },
+      {
+        "name": ".NET Core",
+        "description": "ASP.NET Core",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/.NET_Core_Logo.svg"
+      },
+      {
+        "name": "SQL Server",
+        "description": "Stored Procedures, Functions",
+        "logo": "https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg"
+      }
     ],
     "otherTechnologies": [
-      "RabbitMQ",
-      "Hangfire",
-      "Serilog",
-      "Xunit",
-      "Azure (WebWorkers, Service Bus)",
-      "AWS (Lambda, API Gateway)",
-      "Git (GitHub, Azure DevOps, AWS CodePipeline)",
-      "Python (Jupyter, Flask, Airflow, Spark)"
+      {
+        "name": "RabbitMQ",
+        "logo": "https://www.svgrepo.com/show/303576/rabbitmq-logo.svg"
+      },
+      {
+        "name": "Hangfire",
+        "logo": "https://raw.githubusercontent.com/HangfireIO/Hangfire/master/src/Hangfire.Core/Content/hangfire.png"
+      },
+      {
+        "name": "Serilog",
+        "logo": "https://serilog.net/img/serilog.png"
+      },
+      {
+        "name": "Xunit",
+        "logo": "https://avatars.githubusercontent.com/u/2092016?s=200&v=4"
+      },
+      {
+        "name": "Azure",
+        "description": "WebWorkers, Service Bus",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg"
+      },
+      {
+        "name": "AWS",
+        "description": "Lambda, API Gateway",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+      },
+      {
+        "name": "Git",
+        "description": "GitHub, Azure DevOps, AWS CodePipeline",
+        "logo": "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg"
+      },
+      {
+        "name": "Python",
+        "description": "Jupyter, Flask, Airflow, Spark",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+      }
     ],
     "workMethodologies": [
       "Scrum",

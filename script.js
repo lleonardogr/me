@@ -96,21 +96,33 @@ function loadAboutSection(profile) {
 
 // Skills Section
 function loadSkillsSection(skills) {
-    // Main Technologies
+    // Main Technologies Carousel
     const mainTechnologies = document.getElementById('main-technologies');
     skills.mainTechnologies.forEach(skill => {
         const skillItem = document.createElement('div');
-        skillItem.textContent = skill;
-        skillItem.classList.add('skill-item');
+        skillItem.classList.add('carousel-item');
+        skillItem.innerHTML = `
+            <img src="${skill.logo}" alt="${skill.name}" loading="lazy">
+            <div class="skill-text">
+                <div class="skill-name">${skill.name}</div>
+                <div class="skill-description">${skill.description}</div>
+            </div>
+        `;
         mainTechnologies.appendChild(skillItem);
     });
     
-    // Other Technologies
+    // Other Technologies Carousel
     const otherTechnologies = document.getElementById('other-technologies');
     skills.otherTechnologies.forEach(skill => {
         const skillItem = document.createElement('div');
-        skillItem.textContent = skill;
-        skillItem.classList.add('skill-item');
+        skillItem.classList.add('carousel-item');
+        skillItem.innerHTML = `
+            <img src="${skill.logo}" alt="${skill.name}" loading="lazy">
+            <div class="skill-text">
+                <div class="skill-name">${skill.name}</div>
+                ${skill.description ? `<div class="skill-description">${skill.description}</div>` : ''}
+            </div>
+        `;
         otherTechnologies.appendChild(skillItem);
     });
     
@@ -123,13 +135,112 @@ function loadSkillsSection(skills) {
         methodologies.appendChild(methodItem);
     });
     
+    // Initialize carousels
+    initCarousel('main-technologies', 'main-prev', 'main-next');
+    initCarousel('other-technologies', 'other-prev', 'other-next');
+    
     // Animate skills appearing
     anime({
-        targets: '.skill-item',
+        targets: '.carousel-item, .skill-item',
         opacity: [0, 1],
         scale: [0.8, 1],
         delay: anime.stagger(50),
         easing: 'easeOutElastic(1, .5)'
+    });
+}
+
+// Initialize a carousel with controls
+function initCarousel(trackId, prevBtnId, nextBtnId) {
+    const track = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    
+    if (!track || !prevBtn || !nextBtn) return;
+    
+    let position = 0;
+    const itemWidth = 300; // Item width + margin (adjusted for wider cards)
+    const items = track.querySelectorAll('.carousel-item');
+    const itemCount = items.length;
+    
+    // Calculate how many items are visible at once based on container width
+    const containerWidth = track.parentElement.offsetWidth;
+    const visibleItems = Math.floor(containerWidth / itemWidth);
+    
+    // Update carousel on window resize
+    window.addEventListener('resize', () => {
+        const newContainerWidth = track.parentElement.offsetWidth;
+        const newVisibleItems = Math.floor(newContainerWidth / itemWidth);
+        
+        // Reset position if we're at the end and now have fewer visible items
+        if (position > itemCount - newVisibleItems) {
+            position = Math.max(0, itemCount - newVisibleItems);
+            updateCarouselPosition();
+        }
+    });
+    
+    // Previous button click handler
+    prevBtn.addEventListener('click', () => {
+        position = Math.max(0, position - 1);
+        updateCarouselPosition();
+    });
+    
+    // Next button click handler
+    nextBtn.addEventListener('click', () => {
+        const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+        position = Math.min(itemCount - visibleItems, position + 1);
+        updateCarouselPosition();
+    });
+    
+    // Update carousel position
+    function updateCarouselPosition() {
+        track.style.transform = `translateX(-${position * itemWidth}px)`;
+        
+        // Update button states
+        prevBtn.disabled = position === 0;
+        const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+        nextBtn.disabled = position >= itemCount - visibleItems;
+        
+        // Update button opacity based on disabled state
+        prevBtn.style.opacity = prevBtn.disabled ? 0.5 : 1;
+        nextBtn.style.opacity = nextBtn.disabled ? 0.5 : 1;
+    }
+    
+    // Initialize button states
+    updateCarouselPosition();
+    
+    // Touch support for mobile swiping
+    let startX, moveX;
+    let isDown = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        moveX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchend', () => {
+        isDown = false;
+        if (!moveX) return;
+        
+        const diff = startX - moveX;
+        const threshold = 50; // Minimum distance for swipe
+        
+        if (diff > threshold) {
+            // Swipe left, go to next
+            const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+            position = Math.min(itemCount - visibleItems, position + 1);
+        } else if (diff < -threshold) {
+            // Swipe right, go to previous
+            position = Math.max(0, position - 1);
+        }
+        
+        updateCarouselPosition();
+        moveX = null;
     });
 }
 
