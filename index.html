@@ -6,57 +6,23 @@
     <title>Leonardo Gasparini - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="game-container">
-        <!-- Title Animation Area -->
+    <div class="container">
+        <!-- Header Area -->
         <header>
             <div class="language-switcher">
                 <button class="lang-btn active" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="pt">PT</button>
             </div>
-            <h1 id="title-animation">Welcome to Leonardo's Portfolio</h1>
-            <!-- SNES Animation Container -->
-            <div class="snes-animation-container">
-                <div class="snes-console">
-                    <div class="snes-body"></div>
-                    <div class="snes-front-panel">
-                        <div class="power-button"></div>
-                        <div class="reset-button"></div>
-                        <div class="cartridge-slot"></div>
-                    </div>
-                    <div class="snes-controller">
-                        <div class="controller-body"></div>
-                        <div class="d-pad"></div>
-                        <div class="buttons-area">
-                            <div class="button button-y"></div>
-                            <div class="button button-x"></div>
-                            <div class="button button-b"></div>
-                            <div class="button button-a"></div>
-                        </div>
-                        <div class="start-select-area">
-                            <div class="button button-select"></div>
-                            <div class="button button-start"></div>
-                        </div>
-                        <div class="shoulder-buttons">
-                            <div class="button button-l"></div>
-                            <div class="button button-r"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pixel-television">
-                    <div class="tv-screen">
-                        <div class="tv-content">PRESS START</div>
-                    </div>
-                    <div class="tv-buttons"></div>
-                </div>
-            </div>
+            <h1 id="title-animation">Leonardo Gasparini</h1>
+            <p class="subtitle">Software Architecture Specialist | .NET Developer | Technology Educator</p>
         </header>
 
         <!-- Navigation Menu -->
-        <nav class="game-menu">
+        <nav class="main-nav">
             <ul>
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -70,16 +36,14 @@
         <!-- Main Content Area -->
         <main>
             <!-- About Section -->
-            <section id="about" class="game-section">
-                <h2 class="pixel-title">About Me</h2>
-                <div class="pixel-divider"></div>
-                <div id="about-content" class="dialog-box"></div>
+            <section id="about" class="section">
+                <h2 class="section-title">About Me</h2>
+                <div id="about-content" class="content-box"></div>
             </section>
 
             <!-- Skills Section -->
-            <section id="skills" class="game-section">
-                <h2 class="pixel-title">Skills</h2>
-                <div class="pixel-divider"></div>
+            <section id="skills" class="section">
+                <h2 class="section-title">Skills</h2>
                 
                 <div class="skill-category">
                     <h3>Main Technologies</h3>
@@ -98,23 +62,20 @@
             </section>
 
             <!-- Languages Section -->
-            <section id="languages" class="game-section">
-                <h2 class="pixel-title">Languages</h2>
-                <div class="pixel-divider"></div>
+            <section id="languages" class="section">
+                <h2 class="section-title">Languages</h2>
                 <div id="languages-content" class="skill-grid"></div>
             </section>
 
             <!-- Certifications Section -->
-            <section id="certifications" class="game-section">
-                <h2 class="pixel-title">Certifications</h2>
-                <div class="pixel-divider"></div>
+            <section id="certifications" class="section">
+                <h2 class="section-title">Certifications</h2>
                 <div id="certifications-content" class="scroll-list"></div>
             </section>
 
             <!-- Timeline Section (Combined Experience & Education) -->
-            <section id="timeline" class="game-section">
-                <h2 class="pixel-title">Career Timeline</h2>
-                <div class="pixel-divider"></div>
+            <section id="timeline" class="section">
+                <h2 class="section-title">Career Timeline</h2>
                 <div class="timeline-container">
                     <div class="timeline-line"></div>
                     <div id="timeline-content" class="timeline-items"></div>
@@ -122,21 +83,16 @@
             </section>
 
             <!-- Contact Section -->
-            <section id="contact" class="game-section">
-                <h2 class="pixel-title">Contact</h2>
-                <div class="pixel-divider"></div>
+            <section id="contact" class="section">
+                <h2 class="section-title">Contact</h2>
                 <div id="contact-content" class="contact-buttons"></div>
             </section>
         </main>
 
         <footer>
-            <div class="pixel-divider"></div>
-            <p>© <span id="current-year">2025</span> Leonardo Gasparini | A SNES-styled portfolio</p>
+            <p>© <span id="current-year">2025</span> Leonardo Gasparini | Professional Portfolio</p>
         </footer>
     </div>
-
-    <!-- Background starfield -->
-    <div class="starfield"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>

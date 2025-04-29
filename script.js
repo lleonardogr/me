@@ -45,9 +45,6 @@ async function initPortfolio() {
     // Initialize title animation
     initTitleAnimation();
     
-    // Initialize SNES animation
-    initSNESAnimation();
-    
     // Load content sections
     loadAboutSection(portfolioData.profile);
     loadSkillsSection(portfolioData.skills);
@@ -64,311 +61,6 @@ async function initPortfolio() {
 
     // Initialize section transitions
     initSectionTransitions();
-}
-
-// Initialize language switcher
-function initLanguageSwitcher() {
-    const langButtons = document.querySelectorAll('.lang-btn');
-    
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const lang = btn.getAttribute('data-lang');
-            
-            // Don't do anything if this language is already active
-            if (currentLanguage === lang) return;
-            
-            // Update active button
-            langButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Load translations for the selected language
-            if (lang !== 'en' && !translations) {
-                translations = await loadTranslations(lang);
-            }
-            
-            // Update current language
-            currentLanguage = lang;
-            
-            // Update all text on the page
-            updatePageLanguage();
-            
-            // Special animation for language change
-            anime({
-                targets: '.game-section',
-                opacity: [0.5, 1],
-                duration: 800,
-                easing: 'easeOutQuad'
-            });
-        });
-    });
-}
-
-// Update page language
-function updatePageLanguage() {
-    if (currentLanguage === 'en') {
-        // Reset to English (default)
-        resetToEnglish();
-        return;
-    }
-    
-    if (!translations) return;
-    
-    // Update welcome title
-    document.getElementById('title-animation').textContent = translations.general.welcomeTitle;
-    
-    // Update TV content
-    document.querySelector('.tv-content').textContent = translations.general.pressStart;
-    
-    // Update navigation menu
-    const navLinks = document.querySelectorAll('.game-menu a');
-    navLinks[0].textContent = translations.navigation.aboutMe;
-    navLinks[1].textContent = translations.navigation.skills;
-    navLinks[2].textContent = translations.navigation.languages;
-    navLinks[3].textContent = translations.navigation.certifications;
-    navLinks[4].textContent = translations.navigation.timeline || "Timeline";
-    navLinks[5].textContent = translations.navigation.contact;
-    
-    // Update section titles
-    document.querySelector('#about .pixel-title').textContent = translations.sections.aboutMe.title;
-    document.querySelector('#skills .pixel-title').textContent = translations.sections.skills.title;
-    document.querySelector('#languages .pixel-title').textContent = translations.sections.languages.title;
-    document.querySelector('#certifications .pixel-title').textContent = translations.sections.certifications.title;
-    document.querySelector('#timeline .pixel-title').textContent = translations.sections.timeline?.title || "Career Timeline";
-    document.querySelector('#contact .pixel-title').textContent = translations.sections.contact.title;
-    
-    // Update skill category headings
-    const skillCategories = document.querySelectorAll('.skill-category h3');
-    skillCategories[0].textContent = translations.sections.skills.mainTechnologies;
-    skillCategories[1].textContent = translations.sections.skills.otherTechnologies;
-    skillCategories[2].textContent = translations.sections.skills.workMethodologies;
-    
-    // Update footer copyright
-    document.querySelector('footer p').innerHTML = translations.general.copyright;
-    
-    // Update contact button texts
-    const contactButtons = document.querySelectorAll('.contact-button span');
-    contactButtons[0].textContent = translations.sections.contact.email;
-    contactButtons[1].textContent = translations.sections.contact.linkedin;
-    contactButtons[2].textContent = translations.sections.contact.github;
-    contactButtons[3].textContent = translations.sections.contact.linktree;
-}
-
-// Reset to English
-function resetToEnglish() {
-    // Reset welcome title
-    document.getElementById('title-animation').textContent = "Welcome to Leonardo's Portfolio";
-    
-    // Reset TV content
-    document.querySelector('.tv-content').textContent = "PRESS START";
-    
-    // Reset navigation menu
-    const navLinks = document.querySelectorAll('.game-menu a');
-    navLinks[0].textContent = "About Me";
-    navLinks[1].textContent = "Skills";
-    navLinks[2].textContent = "Languages";
-    navLinks[3].textContent = "Certifications";
-    navLinks[4].textContent = "Timeline";
-    navLinks[5].textContent = "Contact";
-    
-    // Reset section titles
-    document.querySelector('#about .pixel-title').textContent = "About Me";
-    document.querySelector('#skills .pixel-title').textContent = "Skills";
-    document.querySelector('#languages .pixel-title').textContent = "Languages";
-    document.querySelector('#certifications .pixel-title').textContent = "Certifications";
-    document.querySelector('#timeline .pixel-title').textContent = "Career Timeline";
-    document.querySelector('#contact .pixel-title').textContent = "Contact";
-    
-    // Reset skill category headings
-    const skillCategories = document.querySelectorAll('.skill-category h3');
-    skillCategories[0].textContent = "Main Technologies";
-    skillCategories[1].textContent = "Other Technologies";
-    skillCategories[2].textContent = "Work Methodologies";
-    
-    // Reset footer copyright
-    document.querySelector('footer p').innerHTML = `© <span id="current-year">${new Date().getFullYear()}</span> Leonardo Gasparini | A SNES-styled portfolio`;
-    
-    // Reset contact button texts
-    const contactButtons = document.querySelectorAll('.contact-button span');
-    contactButtons[0].textContent = "Email";
-    contactButtons[1].textContent = "LinkedIn";
-    contactButtons[2].textContent = "GitHub";
-    contactButtons[3].textContent = "Linktree";
-}
-
-// Title Animation with Anime.js
-function initTitleAnimation() {
-    const titleElement = document.getElementById('title-animation');
-    titleElement.style.opacity = '1';
-    
-    anime({
-        targets: '#title-animation',
-        opacity: [0, 1],
-        duration: 1200,
-        easing: 'easeInOutQuad',
-        complete: function() {
-            // Glitch effect after appearing
-            setInterval(() => {
-                anime({
-                    targets: '#title-animation',
-                    color: [
-                        { value: 'rgb(255, 0, 255)', duration: 100 },
-                        { value: 'rgb(0, 255, 255)', duration: 100 },
-                        { value: 'rgb(255, 0, 255)', duration: 100 }
-                    ],
-                    textShadow: [
-                        { value: '0 0 8px rgba(255, 0, 255, 0.8)', duration: 100 },
-                        { value: '0 0 8px rgba(0, 255, 255, 0.8)', duration: 100 },
-                        { value: '0 0 8px rgba(255, 0, 255, 0.8)', duration: 100 }
-                    ],
-                    translateY: [
-                        { value: 0, duration: 50 },
-                        { value: -2, duration: 50 },
-                        { value: 0, duration: 50 }
-                    ],
-                    easing: 'steps(1)'
-                });
-            }, 5000); // Glitch every 5 seconds
-        }
-    });
-}
-
-// SNES Animation with Anime.js
-function initSNESAnimation() {
-    // Animate SNES console floating
-    anime({
-        targets: '.snes-console',
-        translateY: [0, -10],
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutQuad',
-        duration: 3000
-    });
-    
-    // Animate SNES controller floating
-    anime({
-        targets: '.snes-controller',
-        translateY: [0, -8],
-        rotate: -5,
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutQuad',
-        duration: 2800,
-        delay: 200
-    });
-    
-    // Animate TV screen floating
-    anime({
-        targets: '.pixel-television',
-        translateY: [0, -12],
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutQuad',
-        duration: 4000,
-        delay: 300
-    });
-    
-    // Animate blinking text on TV
-    anime({
-        targets: '.tv-content',
-        opacity: [1, 0],
-        easing: 'steps(1)',
-        duration: 1000,
-        loop: true
-    });
-    
-    // Add interactivity to the buttons
-    const buttons = document.querySelectorAll('.button');
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            anime({
-                targets: button,
-                scale: 1.2,
-                backgroundColor: 'var(--accent-color)',
-                boxShadow: '0 0 10px var(--accent-color)',
-                duration: 300,
-                easing: 'easeOutElastic(1, .5)'
-            });
-        });
-        
-        button.addEventListener('mouseleave', () => {
-            anime({
-                targets: button,
-                scale: 1,
-                backgroundColor: 'var(--snes-purple)',
-                boxShadow: '0 2px 0 var(--snes-dark-purple)',
-                duration: 300,
-                easing: 'easeOutQuad'
-            });
-        });
-    });
-    
-    // Special animation for start button
-    const startButton = document.querySelector('.button-start');
-    startButton.addEventListener('click', () => {
-        // Change TV screen content based on current language
-        const tvContent = document.querySelector('.tv-content');
-        tvContent.textContent = currentLanguage === 'en' ? 'LOADING...' : translations?.general?.loading || 'CARREGANDO...';
-        
-        // Flash the screen
-        anime({
-            targets: '.tv-screen',
-            backgroundColor: [
-                { value: '#fff', duration: 100 },
-                { value: '#000', duration: 300 }
-            ],
-            easing: 'linear',
-            complete: function() {
-                // Scroll to About section
-                setTimeout(() => {
-                    document.getElementById('about').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Change TV content back after delay
-                    setTimeout(() => {
-                        tvContent.textContent = currentLanguage === 'en' ? 'PRESS START' : translations?.general?.pressStart || 'PRESSIONE START';
-                    }, 2000);
-                }, 800);
-            }
-        });
-    });
-    
-    // Make power button interactive
-    const powerButton = document.querySelector('.power-button');
-    powerButton.addEventListener('click', () => {
-        // Toggle the TV on/off effect
-        const tvScreen = document.querySelector('.tv-screen');
-        
-        if (tvScreen.classList.contains('tv-off')) {
-            // Turn on
-            tvScreen.classList.remove('tv-off');
-            anime({
-                targets: '.tv-screen',
-                backgroundColor: [
-                    { value: '#000', duration: 500 }
-                ],
-                easing: 'easeOutQuad',
-                complete: function() {
-                    document.querySelector('.tv-content').style.display = 'block';
-                }
-            });
-        } else {
-            // Turn off
-            document.querySelector('.tv-content').style.display = 'none';
-            anime({
-                targets: '.tv-screen',
-                backgroundColor: [
-                    { value: '#222', duration: 200 },
-                    { value: '#111', duration: 200 },
-                    { value: '#000', duration: 200 }
-                ],
-                easing: 'easeInQuad',
-                complete: function() {
-                    tvScreen.classList.add('tv-off');
-                }
-            });
-        }
-    });
 }
 
 // About Section
@@ -486,6 +178,51 @@ function loadCertificationsSection(certifications) {
     });
 }
 
+// Contact Section
+function loadContactSection(contact) {
+    const contactContent = document.getElementById('contact-content');
+    
+    // Email Button
+    const emailButton = document.createElement('a');
+    emailButton.href = `mailto:${contact.email}`;
+    emailButton.classList.add('contact-button');
+    emailButton.innerHTML = `<span>Email</span>`;
+    contactContent.appendChild(emailButton);
+    
+    // LinkedIn Button
+    const linkedinButton = document.createElement('a');
+    linkedinButton.href = contact.linkedin;
+    linkedinButton.target = '_blank';
+    linkedinButton.classList.add('contact-button');
+    linkedinButton.innerHTML = `<span>LinkedIn</span>`;
+    contactContent.appendChild(linkedinButton);
+    
+    // GitHub Button
+    const githubButton = document.createElement('a');
+    githubButton.href = contact.github;
+    githubButton.target = '_blank';
+    githubButton.classList.add('contact-button');
+    githubButton.innerHTML = `<span>GitHub</span>`;
+    contactContent.appendChild(githubButton);
+    
+    // Linktree Button
+    const linktreeButton = document.createElement('a');
+    linktreeButton.href = contact.linktree;
+    linktreeButton.target = '_blank';
+    linktreeButton.classList.add('contact-button');
+    linktreeButton.innerHTML = `<span>Linktree</span>`;
+    contactContent.appendChild(linktreeButton);
+    
+    // Animate contact buttons appearing
+    anime({
+        targets: '.contact-button',
+        opacity: [0, 1],
+        scale: [0.9, 1],
+        delay: anime.stagger(150),
+        easing: 'easeOutElastic(1, .5)'
+    });
+}
+
 // Combined Timeline Section
 function loadCombinedTimeline(experiences, education) {
     const timelineContent = document.getElementById('timeline-content');
@@ -548,9 +285,9 @@ function loadCombinedTimeline(experiences, education) {
         timelineDot.classList.add('timeline-dot');
         // Add different colors for education vs experience
         if (item.type === 'education') {
-            timelineDot.style.backgroundColor = 'var(--accent-color)';
+            timelineDot.style.backgroundColor = 'var(--secondary-color)';
         } else {
-            timelineDot.style.backgroundColor = 'var(--primary-color)';
+            timelineDot.style.backgroundColor = 'var(--secondary-color)';
         }
         timelineItem.appendChild(timelineDot);
         
@@ -579,8 +316,8 @@ function loadCombinedTimeline(experiences, education) {
             
             // Add period
             const period = document.createElement('div');
-            period.style.color = 'var(--primary-color)';
-            period.style.fontSize = '0.65rem';
+            period.style.color = 'var(--text-light)';
+            period.style.fontSize = '0.875rem';
             period.style.marginBottom = '10px';
             period.textContent = item.period;
             itemContent.appendChild(period);
@@ -607,8 +344,8 @@ function loadCombinedTimeline(experiences, education) {
             
             // Add period
             const period = document.createElement('div');
-            period.style.color = 'var(--accent-color)';
-            period.style.fontSize = '0.65rem';
+            period.style.color = 'var(--text-light)';
+            period.style.fontSize = '0.875rem';
             period.textContent = item.period;
             itemContent.appendChild(period);
         }
@@ -639,55 +376,159 @@ function extractYearFromPeriod(periodString) {
     return 0;
 }
 
-// Contact Section
-function loadContactSection(contact) {
-    const contactContent = document.getElementById('contact-content');
+// Initialize language switcher
+function initLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.lang-btn');
     
-    // Email Button
-    const emailButton = document.createElement('a');
-    emailButton.href = `mailto:${contact.email}`;
-    emailButton.classList.add('contact-button');
-    emailButton.innerHTML = `<span>Email</span>`;
-    contactContent.appendChild(emailButton);
-    
-    // LinkedIn Button
-    const linkedinButton = document.createElement('a');
-    linkedinButton.href = contact.linkedin;
-    linkedinButton.target = '_blank';
-    linkedinButton.classList.add('contact-button');
-    linkedinButton.innerHTML = `<span>LinkedIn</span>`;
-    contactContent.appendChild(linkedinButton);
-    
-    // GitHub Button
-    const githubButton = document.createElement('a');
-    githubButton.href = contact.github;
-    githubButton.target = '_blank';
-    githubButton.classList.add('contact-button');
-    githubButton.innerHTML = `<span>GitHub</span>`;
-    contactContent.appendChild(githubButton);
-    
-    // Linktree Button
-    const linktreeButton = document.createElement('a');
-    linktreeButton.href = contact.linktree;
-    linktreeButton.target = '_blank';
-    linktreeButton.classList.add('contact-button');
-    linktreeButton.innerHTML = `<span>Linktree</span>`;
-    contactContent.appendChild(linktreeButton);
-    
-    // Animate contact buttons appearing
-    anime({
-        targets: '.contact-button',
-        opacity: [0, 1],
-        scale: [0.9, 1],
-        delay: anime.stagger(150),
-        easing: 'easeOutElastic(1, .5)'
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const lang = btn.getAttribute('data-lang');
+            
+            // Don't do anything if this language is already active
+            if (currentLanguage === lang) return;
+            
+            // Update active button
+            langButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Load translations for the selected language
+            if (lang !== 'en' && !translations) {
+                translations = await loadTranslations(lang);
+            }
+            
+            // Update current language
+            currentLanguage = lang;
+            
+            // Update all text on the page
+            updatePageLanguage();
+            
+            // Special animation for language change
+            anime({
+                targets: '.section',
+                opacity: [0.8, 1],
+                duration: 500,
+                easing: 'easeOutQuad'
+            });
+        });
     });
+}
+
+// Update page language
+function updatePageLanguage() {
+    if (currentLanguage === 'en') {
+        // Reset to English (default)
+        resetToEnglish();
+        return;
+    }
+    
+    if (!translations) return;
+    
+    // Update welcome title
+    document.getElementById('title-animation').textContent = translations.general.welcomeTitle;
+    
+    // Update navigation menu
+    const navLinks = document.querySelectorAll('.main-nav a');
+    navLinks[0].textContent = translations.navigation.aboutMe;
+    navLinks[1].textContent = translations.navigation.skills;
+    navLinks[2].textContent = translations.navigation.languages;
+    navLinks[3].textContent = translations.navigation.certifications;
+    navLinks[4].textContent = translations.navigation.timeline || "Timeline";
+    navLinks[5].textContent = translations.navigation.contact;
+    
+    // Update section titles
+    document.querySelector('#about .section-title').textContent = translations.sections.aboutMe.title;
+    document.querySelector('#skills .section-title').textContent = translations.sections.skills.title;
+    document.querySelector('#languages .section-title').textContent = translations.sections.languages.title;
+    document.querySelector('#certifications .section-title').textContent = translations.sections.certifications.title;
+    document.querySelector('#timeline .section-title').textContent = translations.sections.timeline?.title || "Career Timeline";
+    document.querySelector('#contact .section-title').textContent = translations.sections.contact.title;
+    
+    // Update skill category headings
+    const skillCategories = document.querySelectorAll('.skill-category h3');
+    skillCategories[0].textContent = translations.sections.skills.mainTechnologies;
+    skillCategories[1].textContent = translations.sections.skills.otherTechnologies;
+    skillCategories[2].textContent = translations.sections.skills.workMethodologies;
+    
+    // Update footer copyright
+    document.querySelector('footer p').innerHTML = translations.general.copyright;
+    
+    // Update contact button texts
+    const contactButtons = document.querySelectorAll('.contact-button span');
+    contactButtons[0].textContent = translations.sections.contact.email;
+    contactButtons[1].textContent = translations.sections.contact.linkedin;
+    contactButtons[2].textContent = translations.sections.contact.github;
+    contactButtons[3].textContent = translations.sections.contact.linktree;
+}
+
+// Reset to English
+function resetToEnglish() {
+    // Reset welcome title
+    document.getElementById('title-animation').textContent = "Leonardo Gasparini";
+    
+    // Reset navigation menu
+    const navLinks = document.querySelectorAll('.main-nav a');
+    navLinks[0].textContent = "About Me";
+    navLinks[1].textContent = "Skills";
+    navLinks[2].textContent = "Languages";
+    navLinks[3].textContent = "Certifications";
+    navLinks[4].textContent = "Timeline";
+    navLinks[5].textContent = "Contact";
+    
+    // Reset section titles
+    document.querySelector('#about .section-title').textContent = "About Me";
+    document.querySelector('#skills .section-title').textContent = "Skills";
+    document.querySelector('#languages .section-title').textContent = "Languages";
+    document.querySelector('#certifications .section-title').textContent = "Certifications";
+    document.querySelector('#timeline .section-title').textContent = "Career Timeline";
+    document.querySelector('#contact .section-title').textContent = "Contact";
+    
+    // Reset skill category headings
+    const skillCategories = document.querySelectorAll('.skill-category h3');
+    skillCategories[0].textContent = "Main Technologies";
+    skillCategories[1].textContent = "Other Technologies";
+    skillCategories[2].textContent = "Work Methodologies";
+    
+    // Reset footer copyright
+    document.querySelector('footer p').innerHTML = `© <span id="current-year">${new Date().getFullYear()}</span> Leonardo Gasparini | Professional Portfolio`;
+    
+    // Reset contact button texts
+    const contactButtons = document.querySelectorAll('.contact-button span');
+    contactButtons[0].textContent = "Email";
+    contactButtons[1].textContent = "LinkedIn";
+    contactButtons[2].textContent = "GitHub";
+    contactButtons[3].textContent = "Linktree";
+}
+
+// Title Animation with Anime.js
+function initTitleAnimation() {
+    const titleElement = document.getElementById('title-animation');
+    titleElement.style.opacity = '1';
+    
+    anime({
+        targets: '#title-animation',
+        opacity: [0, 1],
+        translateY: [-20, 0],
+        duration: 1200,
+        easing: 'easeOutQuad'
+    });
+    
+    // Also animate the subtitle if present
+    if (document.querySelector('.subtitle')) {
+        anime({
+            targets: '.subtitle',
+            opacity: [0, 1],
+            translateY: [-10, 0],
+            duration: 1200,
+            delay: 300,
+            easing: 'easeOutQuad'
+        });
+    }
 }
 
 // Section Transitions
 function initSectionTransitions() {
     // Simple scroll watcher to trigger section animations
-    const sections = document.querySelectorAll('.game-section');
+    const sections = document.querySelectorAll('.section');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -695,14 +536,13 @@ function initSectionTransitions() {
                 // Add a class to trigger animation
                 entry.target.classList.add('section-visible');
                 
-                // Simple pixel-style transition effect
+                // Simple fade-in animation effect
                 anime({
                     targets: entry.target,
-                    backgroundColor: [
-                        { value: 'rgba(255, 255, 255, 0.1)', duration: 100 },
-                        { value: 'rgba(30, 30, 50, 0.7)', duration: 300 }
-                    ],
-                    easing: 'steps(3)'
+                    opacity: [0.7, 1],
+                    translateY: [20, 0],
+                    duration: 800,
+                    easing: 'easeOutQuad'
                 });
             }
         });
@@ -742,27 +582,7 @@ function initTimelineAnimations() {
     });
 }
 
-// Generate starfield
-function generateStarfield() {
-    const starfield = document.querySelector('.starfield');
-    const numberOfStars = 100;
-    
-    for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        star.style.width = `${Math.random() * 2 + 1}px`;
-        star.style.height = star.style.width;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 10}s`;
-        star.style.animationDuration = `${Math.random() * 10 + 10}s`;
-        
-        starfield.appendChild(star);
-    }
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initPortfolio();
-    generateStarfield();
 });
